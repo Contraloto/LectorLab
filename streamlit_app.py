@@ -5,13 +5,14 @@ st.write(
     "Este es un espacio donde puedes subir tus documentos de laboratorio para ser analizados. Recuerda que este servicio no reemplaza la opinión de un médico, es solo una orientación para enriquecer tu conocimiento"
 )
 
-import os
+import streamlit as st
+import tkinter as tk
+from tkinter import filedialog
 
-def abrir_explorador_archivos():
-    """Abre el explorador de archivos del sistema operativo."""
-    if os.name == 'nt':  # Si es Windows
-        os.startfile('explorer')
-    elif os.name == 'posix':  # Si es Linux o macOS
-        os.system('xdg-open')
+def seleccionar_archivo():
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    return file_path
 
-st.button('Buscar Archivo', on_click=abrir_explorador_archivos)
+st.button('Seleccionar Archivo', on_click=seleccionar_archivo)

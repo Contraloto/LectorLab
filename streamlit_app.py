@@ -4,7 +4,7 @@ with st.container():
     st.markdown(
         """
         <div style='text-align: center; font-size: 3rem; color: #4CAF50;'>
-        # Bienvenidos a LectorLab
+        Bienvenidos a LectorLab
         </div>
         """, unsafe_allow_html=True
     )

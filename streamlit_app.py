@@ -1,8 +1,12 @@
 import streamlit as st
 
 st.title("Bienvenidos a LectorLab")
-st.write(
-    "<center>Este es un espacio donde puedes subir tus documentos de laboratorio para ser analizados. Recuerda que este servicio no reemplaza la opinión de un médico, es solo una orientación para enriquecer tu conocimiento</center>"
+st.markdown(
+    """
+    <div style='text-align: center;'>
+    Este es un espacio donde puedes subir tus documentos de laboratorio para ser analizados. Recuerda que este servicio no reemplaza la opinión de un médico, es solo una orientación para enriquecer tu conocimiento
+    </div>
+    """, unsafe_allow_html=True
 )
 
 import streamlit as st

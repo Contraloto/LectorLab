@@ -16,37 +16,18 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-import streamlit as st
-import os
+# Botón para cargar archivo
+archivo = st.file_uploader("Selecciona un archivo", type=None)
 
-def seleccionar_archivo():
-    """Abre un diálogo para seleccionar un archivo y devuelve su ruta."""
-    try:
-        # Intenta utilizar la biblioteca tkinter para una interfaz más nativa
-        import tkinter as tk
-        from tkinter import filedialog
+# Verifica si se seleccionó un archivo
+if archivo is not None:
+    st.write("Archivo cargado exitosamente:")
+    st.write(f"Nombre del archivo: {archivo.name}")
+    st.write(f"Tamaño del archivo: {archivo.size} bytes")
 
-        root = tk.Tk()
-        root.withdraw()
-        ruta_archivo = filedialog.askopenfilename()
-        return ruta_archivo
-    except ImportError:
-        # Si tkinter no está instalado, utiliza streamlit-file-uploader
-        try:
-            import streamlit.components.v1 as components
-            uploaded_file = components.file_uploader("Selecciona un archivo", type=["csv", "txt", "pdf"])  # Ajusta las extensiones según tus necesidades
-            if uploaded_file is not None:
-                return uploaded_file.name
-            else:
-                return None
-        except ImportError:
-            # Si ninguna de las opciones anteriores funciona, muestra un mensaje de error
-            st.error("No se pudo importar ninguna biblioteca para seleccionar archivos. Verifica las instalaciones.")
-
-# Botón para seleccionar el archivo
-st.button("Seleccionar Archivo", on_click=seleccionar_archivo)
-
-# Mostrar la ruta del archivo seleccionado (opcional)
-ruta = seleccionar_archivo()
-if ruta:
-    st.write("Has seleccionado el archivo:", ruta)
+    # Si el archivo es de texto, puedes leerlo como ejemplo
+    contenido = archivo.read()
+    st.write("Contenido del archivo:")
+    st.text(contenido.decode("utf-8", errors="ignore"))
+else:
+    st.write("No has seleccionado ningún archivo.")

@@ -1,6 +1,12 @@
 import streamlit as st
 
-st.title("Bienvenidos a LectorLab")
+st.markdown(
+    """
+    <div style='text-align: center;'>
+    # Bienvenidos a LectorLab
+    </div>
+    """, unsafe_allow_html=True
+)
 st.markdown(
     """
     <div style='text-align: center;'>

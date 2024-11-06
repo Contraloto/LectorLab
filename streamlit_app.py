@@ -2,7 +2,7 @@ import streamlit as st
 
 st.title("Bienvenidos a LectorLab")
 st.write(
-    "Este es un espacio donde puedes subir tus documentos de laboratorio para ser analizados. Recuerda que este servicio no reemplaza la opinión de un médico, es solo una orientación para enriquecer tu conocimiento"
+    "<center>Este es un espacio donde puedes subir tus documentos de laboratorio para ser analizados. Recuerda que este servicio no reemplaza la opinión de un médico, es solo una orientación para enriquecer tu conocimiento</center>"
 )
 
 import streamlit as st

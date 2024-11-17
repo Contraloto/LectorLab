@@ -1,1 +1,6 @@
 streamlit
+pytesseract
+pillow
+pdf2image
+tesseract-ocr
+poppler-utils

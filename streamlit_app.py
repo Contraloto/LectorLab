@@ -3,9 +3,15 @@ from PIL import Image
 import pytesseract
 from pdf2image import convert_from_path
 import tempfile
+import requests
+import json
 
 # Configura la ruta de Tesseract si es necesario
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# Configura la API de DeepSeek
+DEEPSEEK_API_URL = "https://api.deepseek.com/v1/analyze"  # Reemplaza con la URL correcta
+DEEPSEEK_API_KEY = "tu_api_key_aqui"  # Reemplaza con tu clave API
 
 # Interfaz Streamlit
 with st.container():
@@ -54,6 +60,26 @@ if archivo is not None:
             # Mostrar el texto extraído
             st.subheader("Texto extraído:")
             st.text_area("Contenido del documento", texto_extraido, height=300)
+
+            # Enviar el texto a la API de DeepSeek para análisis
+            headers = {
+                "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+                "Content-Type": "application/json"
+            }
+            data = {
+                "text": texto_extraido,
+                "options": {
+                    "analysis_type": "medical"  # Ajusta según las opciones de la API
+                }
+            }
+            response = requests.post(DEEPSEEK_API_URL, headers=headers, data=json.dumps(data))
+
+            if response.status_code == 200:
+                analysis_result = response.json()
+                st.subheader("Análisis de DeepSeek:")
+                st.write(analysis_result.get("analysis", "No se pudo obtener el análisis."))
+            else:
+                st.error("Error al conectar con la API de DeepSeek.")
+
 else:
     st.write("No has seleccionado ningún archivo.")
-
